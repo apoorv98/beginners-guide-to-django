@@ -10,6 +10,6 @@ def signup(request):
             user = form.save()
             auth_login(request, user)
             return redirect('home')
-        else:
-            form = UserCreationForm()
+    else:
+        form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
