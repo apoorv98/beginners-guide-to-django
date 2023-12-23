@@ -1,9 +1,10 @@
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
 from django.urls import resolve
 from django.test import TestCase
 from .views import signup
+
+from .forms import SignUpForm
 
 # Create your tests here.
 class SignUpTests(TestCase):
@@ -23,7 +24,7 @@ class SignUpTests(TestCase):
 
     def test_contains_form(self):
         form = self.response.context.get('form')
-        self.assertIsInstance(form, UserCreationForm)
+        self.assertIsInstance(form, SignUpForm)
 
 class SuccessfulSignUpTests(TestCase):
     def setUp(self):
