@@ -31,7 +31,7 @@ class SignUpTests(TestCase):
         The view must contain 5 inputs:
         csrf, username, email, password1, password2
         '''
-        self.assertContains(self.response, '<input>', 5)
+        self.assertContains(self.response, '<input', 5)
         self.assertContains(self.response, 'type="text"', 1)
         self.assertContains(self.response, 'type="email"', 1)
         self.assertContains(self.response, 'type="password"', 2)
@@ -41,6 +41,7 @@ class SuccessfulSignUpTests(TestCase):
         url = reverse('signup')
         data = {
             'username': 'john',
+            'email': 'john@doe.com',
             'password1': 'abcdef123456',
             'password2': 'abcdef123456'
         }
