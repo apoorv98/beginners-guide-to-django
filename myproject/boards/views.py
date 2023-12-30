@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from django.views.generic import UpdateView
+from django.views.generic import ListView
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 
@@ -30,17 +31,10 @@ class PostUpdateView(UpdateView):
         post.save()
         return redirect('topic_posts', pk=post.topic.board.pk, topic_pk=post.topic.pk)
 
-def home(request):
-    boards = Board.objects.all()
-    # board_names = list()
-
-    # for board in boards:
-    #     board_names.append(board.name)
-
-    # response_html = '<br>'.join(board_names)
-
-    # return HttpResponse(response_html)
-    return render(request, 'home.html', {'boards': boards})
+class BoardListView(ListView):
+    model = Board
+    context_object_name = 'boards'
+    template_name = 'home.html'
 
 def board_topics(request, pk):
     # try:
